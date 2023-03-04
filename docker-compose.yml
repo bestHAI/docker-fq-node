@@ -22,6 +22,10 @@ services:
     # 端口：54321
     # 账号：admin
     # 密码：admin
+    # 安全配置
+    # 端口：65432
+    # 账号：dfqadmin
+    # 密码：admin@dfq
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "./data:/etc/x-ui"
