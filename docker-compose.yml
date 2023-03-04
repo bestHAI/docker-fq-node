@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  nginx:
+    image: "nginx"
+    container_name: "nginx"
+    user: root
+    privileged: true
+    network_mode: "host"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./web:/home/web:ro"
+      - "./nginx/:/etc/nginx/:ro"
+    restart: always
+
+  xui:
+    image: "enwaiax/x-ui:latest"
+    container_name: "x-ui"
+    network_mode: "host"
+    # 默认配置
+    # 端口：54321
+    # 账号：admin
+    # 密码：admin
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - './data:/etc/x-ui'
+      - './cert:/root/cert'
+    restart: always
+
