@@ -11,6 +11,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "./web:/home/web:ro"
       - "./nginx/:/etc/nginx/:ro"
+      - "./cert:/etc/cert"
     restart: always
 
   xui:
@@ -23,7 +24,20 @@ services:
     # 密码：admin
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - './data:/etc/x-ui'
-      - './cert:/root/cert'
+      - "./data:/etc/x-ui"
+      - "./cert:/root/cert"
+    restart: always
+
+  shadowsocks:
+    image: "shadowsocks/shadowsocks-libev"
+    network_mode: "host"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+    environment:
+      - SERVER_ADDR=0.0.0.0  # 监听地址
+      - SERVER_PORT=8388  # 监听端口
+      - METHOD=aes-256-gcm  # 加密方式
+      - PASSWORD=o0o2022  # 登陆密码
+      - TIMEOUT=600  # 超时时间
     restart: always
 
